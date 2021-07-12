@@ -3,8 +3,14 @@ import time
 import math
 
 pygame.init()
-res_x = 1280
-res_y = 720
-screen = pygame.display.set_mode((res_x,res_y))
+resX = 1280
+resY = 720
+screen = pygame.display.set_mode((resX,resY))
 
 pygame.display.set_caption("Sheep & Wolf")
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
