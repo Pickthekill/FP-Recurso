@@ -74,26 +74,31 @@ while running:
                 mouse = pygame.mouse.get_pos()
                 
                 if (turn == 0):
-                    if (mouse[0] >= (392 + ((sheep_x - 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x - 1)*62)) and mouse[1] >= (195 + ((sheep_y - 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y - 1)*62))):
-                        if(sheep_x != 0 and sheep_y != 0):
-                            sheep_x = sheep_x - 1
-                            sheep_y = sheep_y - 1
-                            turn = 1
-                    if (mouse[0] >= (392 + ((sheep_x + 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x + 1)*62)) and mouse[1] >= (195 + ((sheep_y - 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y - 1)*62))):
-                        if(sheep_x != 7 and sheep_y != 0):
-                            sheep_x = sheep_x + 1
-                            sheep_y = sheep_y - 1
-                            turn = 1
-                    if (mouse[0] >= (392 + ((sheep_x - 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x - 1)*62)) and mouse[1] >= (195 + ((sheep_y + 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y + 1)*62))):
-                        if(sheep_x != 0 and sheep_y != 7):
-                            sheep_x = sheep_x - 1
-                            sheep_y = sheep_y + 1
-                            turn = 1
-                    if (mouse[0] >= (392 + ((sheep_x + 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x + 1)*62)) and mouse[1] >= (195 + ((sheep_y + 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y + 1)*62))):
-                        if(sheep_x != 7 and sheep_y != 7):
-                            sheep_x = sheep_x + 1
-                            sheep_y = sheep_y + 1
-                            turn = 1
+                    if(not(wolf1_x == sheep_x - 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x - 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x - 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x - 1 and wolf4_y == sheep_y - 1)):    
+                        if (mouse[0] >= (392 + ((sheep_x - 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x - 1)*62)) and mouse[1] >= (195 + ((sheep_y - 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y - 1)*62))):
+                            if(sheep_x != 0 and sheep_y != 0):
+                                sheep_x = sheep_x - 1
+                                sheep_y = sheep_y - 1
+                                turn = 1
+
+                    if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y - 1)):        
+                        if (mouse[0] >= (392 + ((sheep_x + 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x + 1)*62)) and mouse[1] >= (195 + ((sheep_y - 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y - 1)*62))):
+                            if(sheep_x != 7 and sheep_y != 0):
+                                sheep_x = sheep_x + 1
+                                sheep_y = sheep_y - 1
+                                turn = 1
+                    if(not(wolf1_x == sheep_x - 1 and wolf1_y == sheep_y + 1 or wolf2_x == sheep_x - 1 and wolf2_y == sheep_y + 1 or wolf3_x == sheep_x - 1 and wolf3_y == sheep_y + 1 or wolf4_x == sheep_x - 1 and wolf4_y == sheep_y + 1)):    
+                        if (mouse[0] >= (392 + ((sheep_x - 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x - 1)*62)) and mouse[1] >= (195 + ((sheep_y + 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y + 1)*62))):
+                            if(sheep_x != 0 and sheep_y != 7):
+                                sheep_x = sheep_x - 1
+                                sheep_y = sheep_y + 1
+                                turn = 1
+                    if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y + 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y + 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y + 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y + 1)):    
+                        if (mouse[0] >= (392 + ((sheep_x + 1)*62)) and mouse[0] <= (392 + 62 + ((sheep_x + 1)*62)) and mouse[1] >= (195 + ((sheep_y + 1)*62)) and mouse[1] <= (195 + 62 + ((sheep_y + 1)*62))):
+                            if(sheep_x != 7 and sheep_y != 7):
+                                sheep_x = sheep_x + 1
+                                sheep_y = sheep_y + 1
+                                turn = 1
 
                 if (turn == 1):
                     if(sheep_x == 0):
@@ -114,59 +119,91 @@ while running:
                         phase = 3
 
                     if (mouse[0] >= (392 + (wolf1_x*62)) and mouse[0] <= (392 + 62 + (wolf1_x*62)) and mouse[1] >= (195 + (wolf1_y*62)) and mouse[1] <= (195 + 62 + (wolf1_y*62))):
-                        selected_wolf = 1
-                        turn = 2
+                        #Impede que o wolf1 vá para alem do quadro, passando imediatamente para o jogador
+                        if (wolf1_y != 7):
+                            selected_wolf = 1
+                            turn = 2
+                        else:
+                            turn = 0
                     if (mouse[0] >= (392 + (wolf2_x*62)) and mouse[0] <= (392 + 62 + (wolf2_x*62)) and mouse[1] >= (195 + (wolf2_y*62)) and mouse[1] <= (195 + 62 + (wolf2_y*62))):
-                        selected_wolf = 2
-                        turn = 2
+                        #Impede que o wolf2 vá para alem do quadro, passando imediatamente para o jogador
+                        if (wolf2_y != 7):
+                            selected_wolf = 2
+                            turn = 2
+                        else:
+                            turn = 0
                     if (mouse[0] >= (392 + (wolf3_x*62)) and mouse[0] <= (392 + 62 + (wolf3_x*62)) and mouse[1] >= (195 + (wolf3_y*62)) and mouse[1] <= (195 + 62 + (wolf3_y*62))):
-                        selected_wolf = 3
-                        turn = 2
+                        #Impede que o wolf3 vá para alem do quadro, passando imediatamente para o jogador
+                        if (wolf3_y != 7):
+                            selected_wolf = 3
+                            turn = 2
+                        else:
+                            turn = 0
                     if (mouse[0] >= (392 + (wolf4_x*62)) and mouse[0] <= (392 + 62 + (wolf4_x*62)) and mouse[1] >= (195 + (wolf4_y*62)) and mouse[1] <= (195 + 62 + (wolf4_y*62))):
-                        selected_wolf = 4
-                        turn = 2
+                        #Impede que o wolf4 vá para alem do quadro, passando imediatamente para o jogador
+                        if (wolf4_y != 7):
+                            selected_wolf = 4
+                            turn = 2
+                        else:
+                            turn = 0
 
                 if (turn == 2):
-                    if (mouse[0] >= (392 + ((wolf1_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf1_x - 1)*62)) and mouse[1] >= (195 + ((wolf1_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf1_y + 1)*62))):
-                        if (selected_wolf == 1 and wolf1_x != 0):
-                            turn = 0
-                            wolf1_x = wolf1_x - 1
-                            wolf1_y = wolf1_y + 1
-                    if (mouse[0] >= (392 + ((wolf1_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf1_x + 1)*62)) and mouse[1] >= (195 + ((wolf1_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf1_y + 1)*62))):
-                        if (selected_wolf == 1 and wolf1_x != 7):
-                            turn = 0
-                            wolf1_x = wolf1_x + 1
-                            wolf1_y = wolf1_y + 1
-                    if (mouse[0] >= (392 + ((wolf2_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf2_x - 1)*62)) and mouse[1] >= (195 + ((wolf2_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf2_y + 1)*62))):
-                        if (selected_wolf == 2 and wolf2_x != 0):
-                            turn = 0
-                            wolf2_x = wolf2_x - 1
-                            wolf2_y = wolf2_y + 1
-                    if (mouse[0] >= (392 + ((wolf2_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf2_x + 1)*62)) and mouse[1] >= (195 + ((wolf2_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf2_y + 1)*62))):
-                        if (selected_wolf == 2 and wolf2_x != 7):
-                            turn = 0
-                            wolf2_x = wolf2_x + 1
-                            wolf2_y = wolf2_y + 1
-                    if (mouse[0] >= (392 + ((wolf3_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf3_x - 1)*62)) and mouse[1] >= (195 + ((wolf3_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf3_y + 1)*62))):
-                        if (selected_wolf == 3 and wolf3_x != 0):
-                            turn = 0
-                            wolf3_x = wolf3_x - 1
-                            wolf3_y = wolf3_y + 1
-                    if (mouse[0] >= (392 + ((wolf3_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf3_x + 1)*62)) and mouse[1] >= (195 + ((wolf3_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf3_y + 1)*62))):
-                        if (selected_wolf == 3 and wolf3_x != 7):
-                            turn = 0
-                            wolf3_x = wolf3_x + 1
-                            wolf3_y = wolf3_y + 1
-                    if (mouse[0] >= (392 + ((wolf4_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf4_x - 1)*62)) and mouse[1] >= (195 + ((wolf4_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf4_y + 1)*62))):
-                        if (selected_wolf == 4 and wolf4_x != 0):
-                            turn = 0
-                            wolf4_x = wolf4_x - 1
-                            wolf4_y = wolf4_y + 1
-                    if (mouse[0] >= (392 + ((wolf4_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf4_x + 1)*62)) and mouse[1] >= (195 + ((wolf4_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf4_y + 1)*62))):
-                        if (selected_wolf == 4 and wolf4_x != 7):
-                            turn = 0
-                            wolf4_x = wolf4_x + 1
-                            wolf4_y = wolf4_y + 1
+                    #Baixo à esquerda wolf 1
+                    if(not(sheep_x == wolf1_x-1 and sheep_y == wolf1_y+1)):
+                        if (mouse[0] >= (392 + ((wolf1_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf1_x - 1)*62)) and mouse[1] >= (195 + ((wolf1_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf1_y + 1)*62))):
+                            if (selected_wolf == 1 and wolf1_x != 0):
+                                turn = 0
+                                wolf1_x = wolf1_x - 1
+                                wolf1_y = wolf1_y + 1
+                    #Baixo à direita wolf 1
+                    if(not(sheep_x == wolf1_x+1 and sheep_y == wolf1_y+1)):    
+                        if (mouse[0] >= (392 + ((wolf1_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf1_x + 1)*62)) and mouse[1] >= (195 + ((wolf1_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf1_y + 1)*62))):
+                            if (selected_wolf == 1 and wolf1_x != 7):
+                                turn = 0
+                                wolf1_x = wolf1_x + 1
+                                wolf1_y = wolf1_y + 1
+                    #Baixo à esquerda wolf 2
+                    if(not(sheep_x == wolf2_x-1 and sheep_y == wolf2_y+1)):    
+                        if (mouse[0] >= (392 + ((wolf2_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf2_x - 1)*62)) and mouse[1] >= (195 + ((wolf2_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf2_y + 1)*62))):
+                            if (selected_wolf == 2 and wolf2_x != 0):
+                                turn = 0
+                                wolf2_x = wolf2_x - 1
+                                wolf2_y = wolf2_y + 1
+                    #Baixo à direita wolf 2
+                    if(not(sheep_x == wolf2_x+1 and sheep_y == wolf2_y+1)): 
+                        if (mouse[0] >= (392 + ((wolf2_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf2_x + 1)*62)) and mouse[1] >= (195 + ((wolf2_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf2_y + 1)*62))):
+                            if (selected_wolf == 2 and wolf2_x != 7):
+                                turn = 0
+                                wolf2_x = wolf2_x + 1
+                                wolf2_y = wolf2_y + 1
+                    #Baixo à esquerda wolf 3
+                    if(not(sheep_x == wolf3_x-1 and sheep_y == wolf3_y+1)):   
+                        if (mouse[0] >= (392 + ((wolf3_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf3_x - 1)*62)) and mouse[1] >= (195 + ((wolf3_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf3_y + 1)*62))):
+                            if (selected_wolf == 3 and wolf3_x != 0):
+                                turn = 0
+                                wolf3_x = wolf3_x - 1
+                                wolf3_y = wolf3_y + 1
+                    #Baixo à direita wolf 3
+                    if(not(sheep_x == wolf3_x+1 and sheep_y == wolf3_y+1)):    
+                        if (mouse[0] >= (392 + ((wolf3_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf3_x + 1)*62)) and mouse[1] >= (195 + ((wolf3_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf3_y + 1)*62))):
+                            if (selected_wolf == 3 and wolf3_x != 7):
+                                turn = 0
+                                wolf3_x = wolf3_x + 1
+                                wolf3_y = wolf3_y + 1
+                    #Baixo à esquerda wolf 4
+                    if(not(sheep_x == wolf4_x-1 and sheep_y == wolf4_y+1)):    
+                        if (mouse[0] >= (392 + ((wolf4_x - 1)*62)) and mouse[0] <= (392 + 62+ ((wolf4_x - 1)*62)) and mouse[1] >= (195 + ((wolf4_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf4_y + 1)*62))):
+                            if (selected_wolf == 4 and wolf4_x != 0):
+                                turn = 0
+                                wolf4_x = wolf4_x - 1
+                                wolf4_y = wolf4_y + 1
+                    #Baixo à direita wolf 4
+                    if(not(sheep_x == wolf4_x+1 and sheep_y == wolf4_y+1)):    
+                        if (mouse[0] >= (392 + ((wolf4_x + 1)*62)) and mouse[0] <= (392 + 62+ ((wolf4_x + 1)*62)) and mouse[1] >= (195 + ((wolf4_y + 1)*62)) and mouse[1] <= (195 + 62 + ((wolf4_y + 1)*62))):
+                            if (selected_wolf == 4 and wolf4_x != 7):
+                                turn = 0
+                                wolf4_x = wolf4_x + 1
+                                wolf4_y = wolf4_y + 1
         
         else:
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -194,32 +231,22 @@ while running:
         screen.blit(bg2, (0,0))
 
         if (turn == 0):
-            #Verificação de esquerda
-            if(sheep_x == 0):
+            #Cima Esquerda
+            if(sheep_x != 0  and sheep_y != 0):
                 if(not(wolf1_x == sheep_x - 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x - 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x - 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x - 1 and wolf4_y == sheep_y - 1)):
-                    screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y + 1)*62)))
-                    screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y - 1)*62)))
-            #Verificação de direita
-            if(sheep_x == 7):
-                if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y - 1)):
                     screen.blit(sheep_block, (392 + ((sheep_x - 1)*62), 195 + ((sheep_y - 1)*62)))
-                    screen.blit(sheep_block, (392 + ((sheep_x - 1)*62), 195 + ((sheep_y + 1)*62)))
-            #Verificação de cima
-            if(sheep_y == 0):
+            #Cima Direita
+            if(sheep_x != 7 and sheep_y != 0):
                 if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y - 1)):
-                    screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y + 1)*62)))
-                    screen.blit(sheep_block, (392 + ((sheep_x - 1)*62), 195 + ((sheep_y + 1)*62)))
-            #Verificação de baixo
-            if(sheep_y == 7):
-                if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y - 1)):
-                    screen.blit(sheep_block, (392 + ((sheep_x - 1)*62), 195 + ((sheep_y - 1)*62)))
                     screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y - 1)*62)))
-            else:
-                if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y - 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y - 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y - 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y - 1)):
-                    screen.blit(sheep_block, (392 + ((sheep_x - 1)*62), 195 + ((sheep_y - 1)*62)))
-                    screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y + 1)*62)))
-                    screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y - 1)*62)))
+            #Baixo Esquerda
+            if(sheep_x != 0 and sheep_y != 7):
+                if(not(wolf1_x == sheep_x - 1 and wolf1_y == sheep_y + 1 or wolf2_x == sheep_x - 1 and wolf2_y == sheep_y + 1 or wolf3_x == sheep_x - 1 and wolf3_y == sheep_y + 1 or wolf4_x == sheep_x - 1 and wolf4_y == sheep_y + 1)):
                     screen.blit(sheep_block, (392 + ((sheep_x - 1)*62), 195 + ((sheep_y + 1)*62)))
+            #Baixo Direita
+            if(sheep_x != 7 and sheep_y != 7):
+                if(not(wolf1_x == sheep_x + 1 and wolf1_y == sheep_y + 1 or wolf2_x == sheep_x + 1 and wolf2_y == sheep_y + 1 or wolf3_x == sheep_x + 1 and wolf3_y == sheep_y + 1 or wolf4_x == sheep_x + 1 and wolf4_y == sheep_y + 1)):
+                    screen.blit(sheep_block, (392 + ((sheep_x + 1)*62), 195 + ((sheep_y + 1)*62)))
 
         if (turn == 1):
             screen.blit(wolf_select, (392 + (wolf1_x*62), 195 + (wolf1_y*62)))
@@ -230,25 +257,33 @@ while running:
         if (turn == 2):
             if (selected_wolf == 1):
                 if(wolf1_x != 0):
-                    screen.blit(wolf_select, (392 + ((wolf1_x - 1)*62), 195 + ((wolf1_y + 1)*62)))
+                    if(not(sheep_x == wolf1_x-1 and sheep_y == wolf1_y+1)):
+                        screen.blit(wolf_select, (392 + ((wolf1_x - 1)*62), 195 + ((wolf1_y + 1)*62)))
                 if(wolf1_x != 7):
-                    screen.blit(wolf_select, (392 + ((wolf1_x + 1)*62), 195 + ((wolf1_y + 1)*62)))
+                    if(not(sheep_x == wolf1_x+1 and sheep_y == wolf1_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf1_x + 1)*62), 195 + ((wolf1_y + 1)*62)))
             if (selected_wolf == 2):
                 if(wolf2_x != 0):
-                    screen.blit(wolf_select, (392 + ((wolf2_x - 1)*62), 195 + ((wolf2_y + 1)*62)))
+                    if(not(sheep_x == wolf2_x-1 and sheep_y == wolf2_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf2_x - 1)*62), 195 + ((wolf2_y + 1)*62)))
                 if(wolf2_x != 7):
-                    screen.blit(wolf_select, (392 + ((wolf2_x + 1)*62), 195 + ((wolf2_y + 1)*62)))
+                    if(not(sheep_x == wolf2_x+1 and sheep_y == wolf2_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf2_x + 1)*62), 195 + ((wolf2_y + 1)*62)))
             if (selected_wolf == 3):
                 if(wolf3_x != 0):
-                    screen.blit(wolf_select, (392 + ((wolf3_x - 1)*62), 195 + ((wolf3_y + 1)*62)))
+                    if(not(sheep_x == wolf3_x-1 and sheep_y == wolf3_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf3_x - 1)*62), 195 + ((wolf3_y + 1)*62)))
                 if(wolf3_x != 7):
-                    screen.blit(wolf_select, (392 + ((wolf3_x + 1)*62), 195 + ((wolf3_y + 1)*62)))
+                    if(not(sheep_x == wolf3_x+1 and sheep_y == wolf3_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf3_x + 1)*62), 195 + ((wolf3_y + 1)*62)))
             if (selected_wolf == 4):
                 if(wolf4_x != 0):
-                    screen.blit(wolf_select, (392 + ((wolf4_x - 1)*62), 195 + ((wolf4_y + 1)*62)))
+                    if(not(sheep_x == wolf4_x-1 and sheep_y == wolf4_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf4_x - 1)*62), 195 + ((wolf4_y + 1)*62)))
                 if(wolf4_x != 7):
-                    screen.blit(wolf_select, (392 + ((wolf4_x + 1)*62), 195 + ((wolf4_y + 1)*62)))
-
+                    if(not(sheep_x == wolf4_x+1 and sheep_y == wolf4_y+1)):    
+                        screen.blit(wolf_select, (392 + ((wolf4_x + 1)*62), 195 + ((wolf4_y + 1)*62)))
+    
         #Sheep and wolves icons
         screen.blit(sheep_icon, (392 + (sheep_x*62), 195 + (sheep_y*62)))
         screen.blit(wolf_icon, (388 + (wolf1_x*62), 195 + (wolf1_y*62)))
@@ -256,16 +291,20 @@ while running:
         screen.blit(wolf_icon, (388 + (wolf3_x*62), 195 + (wolf3_y*62)))
         screen.blit(wolf_icon, (388 + (wolf4_x*62), 195 + (wolf4_y*62)))
 
+    #If the sheep loses
     elif (phase == 2):
         screen.blit(bg3, (0,0))
         screen.blit(sheep_lost, (243, 45))
         screen.blit(play_button, (492,329))
         screen.blit(exit_button, (492,460))
+    
+    #if the wolves lose
     elif (phase == 3):
         screen.blit(bg3, (0,0))
         screen.blit(wolves_lost, (243, 45))
         screen.blit(play_button, (492,329))
         screen.blit(exit_button, (492,460))
+
     else:
         screen.blit(bg1, (0,0))
         screen.blit(play_button, (492,329))
